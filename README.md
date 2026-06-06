@@ -10,6 +10,8 @@ Went back on google and found "sudo nano /etc/apt/sources.list" There was 0 file
 
 <img width="657" height="487" alt="image" src="https://github.com/user-attachments/assets/826c08c1-1ca9-4dd7-9c74-53048a854f35" />
 
+I realized that this error happens because the OS installer leaves the virtual CD-ROM drive mapped as an active package repository source file. So when I try to update using apt update, the system prevents the update.
+
 Had to look inside the extra sources directory with "ls /etc/apt/sources.list.d/" , proceeded to show me a file named cdrom.sources
 
 I then deleted the cdrom file with "sudo rm -f /etc/apt/sources.list.d/*cdrom*" and follow up with sudo apt update. After doing that my sudo apt install git -y worked.
@@ -33,6 +35,14 @@ Lab: Familiarity with Ubuntu Linux – Basic command line navigation and utiliti
 
 <img width="651" height="524" alt="image" src="https://github.com/user-attachments/assets/5b331549-e504-4507-99de-8014115dfdd2" />
 
+I made a typo of  ;s instead of ls and it gave me a syntax error. I learn from this that even a slight typo in your command can confuse the system.
+
+When I entered the ls command, nothing showed up and I thought the command didn’t work, I just realized it meant the desktop folder was empty.
+
+I tried typing cd without telling it which folder to go to, I thought the command did not work but after looking through I noticed my terminal prompt changed from ~/Desktop$ to just ~$. I learned that ~ symbol is my home folder. And running a cd command is like a quick reset.
+
+I ran a naked mkdir and touch command and realized that certain linux commands need to be provided a filename or folder name for them to work.
+
 → Understand directory structure (`/etc`, `/var`, `/home`).
 
 Navigating through "/etc"
@@ -54,6 +64,9 @@ Navigating through "/home"
 
 <img width="1104" height="771" alt="image" src="https://github.com/user-attachments/assets/8bc24835-644c-4a6d-9765-40eded45364c" />
 
+I realized that running man command with mkdir is useful because it shows what these commands are, like -h is for help. This means that I can also rely on the terminal for help.
+
+
 
 
 Session 1b: Exploring Linux
@@ -66,6 +79,13 @@ Lab: Linux Services – Understanding and managing background services.
 Checking the live status of a standard background network service such as the cron scheduler. 
 
 <img width="1211" height="477" alt="image" src="https://github.com/user-attachments/assets/7a7fbd35-6dfd-47b1-bcce-0274e4f16982" />
+
+There was a warning of “The unit file, source configuration file or drop-ins of cron.services changed on disk. Run ‘systemctl daemon-reload’ to reload units”
+
+I went on google and searched the meaning and realized that the system is telling me that "someone changed the configuration files for cron behind my back, and still running on the old version, you need to tell me to refresh."
+
+So I followed the instructions on the screen of systemctl daemon-reload. I googled this command as well and realized that it forces the system to scan the entire filesystem for modified configuration profiles and to update the system.
+
 
 
 → Start/stop services with `sudo systemctl start|stop [service]`.
